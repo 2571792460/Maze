@@ -51,8 +51,7 @@ class App:
 
         textRect_win = text_win.get_rect()
         textRect_lost = text_lost.get_rect()
-        text_backpack = font.render("You have collect {} items. (Total of 4)".format(len(player.backpack)), True,
-                                    (0, 255, 0))
+
 
 
         # Update player position
@@ -111,6 +110,8 @@ class App:
             textRect_time = text_time.get_rect()
             window.blit(text_time, textRect_time)
 
+            text_backpack = font.render("You have collect {} items. (Total of 4)".format(len(player.backpack)), True,
+                                        (0, 255, 0))
 
             # Give different reaction base on keyboard command
             keys = pygame.key.get_pressed()
