@@ -5,6 +5,7 @@ class Player():
     def __init__(self):
         self._backpack = []
 
+
     @property
     def backpack(self):
         return self._backpack

@@ -8,6 +8,7 @@ from maze.models.score import Score
 import datetime
 import wave
 
+
 class App:
 
     def run(self):
@@ -41,6 +42,8 @@ class App:
         player_line_number = 0
         player_column_number = 0
 
+        player_name = input("Enter your Player Name: ")
+
         # Create Win and Lose text
         font = pygame.font.SysFont("comicsansms", 35)
         text_win = font.render('You have Win the Game', True, (0, 255, 0))
@@ -48,6 +51,9 @@ class App:
 
         textRect_win = text_win.get_rect()
         textRect_lost = text_lost.get_rect()
+        text_backpack = font.render("You have collect {} items. (Total of 4)".format(len(player.backpack)), True,
+                                    (0, 255, 0))
+
 
         # Update player position
         for i, sub_list in enumerate(maze.map):
@@ -61,6 +67,8 @@ class App:
         # Game Title is called maze game
         pygame.display.set_caption("maze game")
 
+        # music = pygame.mixer.Sound("./models/Bog-Creatures-On-the-Move.mp3")
+        # music.play()
         file_path = './models/Bog-Creatures-On-the-Move .wav'
         file_wav = wave.open(file_path)
         frequency = file_wav.getframerate()
@@ -74,9 +82,6 @@ class App:
         while running:
             # Paint the screen grey
             window.fill((100, 100, 100))
-
-            # music = pygame.mixer.Sound("./models/Bog-Creatures-On-the-Move.mp3")
-            # music.play()
 
             # Event loop - quit if closed or 'escape' is pressed
             for event in pygame.event.get():
@@ -102,19 +107,12 @@ class App:
             clock = pygame.time.Clock()
             timer -= dt
             dt = clock.tick(10) / 1000
-
             text_time = font.render(str(round(timer, 2)), True, (0, 255, 0))
             textRect_time = text_time.get_rect()
             window.blit(text_time, textRect_time)
-            if timer <= 0:
-                window.fill((255, 255, 255))
-                window.blit(text_lost, textRect_lost)
-                dt = 0
-                text_time_cost = font.render(str(round(60 - timer, 2)), True, (0, 255, 0))
-                window.blit(text_time_cost, (0, 100))
 
-            text_backpack = font.render("You have collect {} items. (Total of 4)".format(len(player.backpack)), True, (0, 255, 0))
-            # Make player move base on keyboard command
+
+            # Give different reaction base on keyboard command
             keys = pygame.key.get_pressed()
             # Show number of items collected in backpack
             if keys[pygame.locals.K_i]:
@@ -162,25 +160,45 @@ class App:
 
             # When player is at exit position, check player backpack and print proper text
             if maze.is_exit(player_line_number, player_column_number) is True:
+
+                window.fill((255, 255, 255))
+                dt = 0
+                date = datetime.datetime.now().strftime("%c")
+                score = (int(timer) * 1) + (len(player.backpack) * 10)
+                text_time_cost = font.render(str(round(60 - timer, 2)), True, (0, 255, 0))
+                text_score = font.render(str(score), True, (0, 255, 0))
+                text_player_name = font.render(player_name, True, (0, 255, 0))
+                player_info = Score(player_name, score, date)
+                player_info.add_score()
+
                 if len(player.backpack) == 4:
-                    window.fill((255, 255, 255))
                     window.blit(text_win, textRect_win)
-                    dt = 0
-                    text_time_cost = font.render(str(round(60 - timer, 2)), True, (0, 255, 0))
-                    window.blit(text_time_cost, (0, 100))
-                    window.blit(text_backpack, (0, 200))
-                    date = datetime.datetime.now().strftime("%c")
-                    score = (int(timer) * 1) + (len(player.backpack) * 10)
-                    # player_name = input("Enter a player name")
-                else:
-                    window.fill((255, 255, 255))
+                    window.blit(text_player_name, (0, 100))
+                    window.blit(text_time_cost, (0, 200))
+                    window.blit(text_backpack, (0, 300))
+                    window.blit(text_score, (0, 400))
+                elif len(player.backpack) <= 4:
                     window.blit(text_lost, textRect_lost)
-                    dt = 0
-                    text_time_cost = font.render(str(round(60 - timer, 2)), True, (0, 255, 0))
-                    window.blit(text_time_cost, (0, 100))
-                    date = datetime.datetime.now().strftime("%c")
-                    score = (int(timer) * 1) + (len(player.backpack) * 10)
-                    # player_name = input("Enter a player name")
+                    window.blit(text_player_name, (0, 100))
+                    window.blit(text_time_cost, (0, 200))
+                    window.blit(text_backpack, (0, 300))
+                    window.blit(text_score, (0, 400))
+
+            elif timer <= 0:
+                window.fill((255, 255, 255))
+                dt = 0
+                date = datetime.datetime.now().strftime("%c")
+                score = (int(timer) * 1) + (len(player.backpack) * 10)
+                text_time_cost = font.render(str(round(60 - timer, 2)), True, (0, 255, 0))
+                text_score = font.render(str(score), True, (0, 255, 0))
+                text_player_name = font.render(player_name, True, (0, 255, 0))
+                player_info = Score(player_name, score, date)
+                player_info.add_score()
+                window.blit(text_lost, textRect_lost)
+                window.blit(text_player_name, (0, 100))
+                window.blit(text_time_cost, (0, 200))
+                window.blit(text_backpack, (0, 300))
+                window.blit(text_score, (0, 400))
 
             # Update the screen
             pygame.display.update()
