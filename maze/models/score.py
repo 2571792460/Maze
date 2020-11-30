@@ -14,7 +14,10 @@ class Score:
         :param3: date: str
         """
         self.player_name = player_name
-        self.score = score
+        if type(score) != int:
+            raise TypeError
+        else:
+            self.score = score
         self.score_list = []
         self.score_dic = {}
         self.date = date

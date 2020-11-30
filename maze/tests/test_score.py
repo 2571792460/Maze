@@ -14,6 +14,13 @@ def test_score_attributes(new_player):
     assert new_player.date == "Sun Nov 29 15:59:51 2020"
 
 
+def test_score_type():
+    """Check score input is an integer"""
+    with pytest.raises(TypeError):
+        Score(player_name="Oliver", score="ten", date="Sun Nov 29 15:59:51 2020")
+    assert True
+
+
 def test_score_list_append(new_player):
     """Check score list append corectlly"""
     assert new_player.score_list == [{"player_name": "Rico", "score": 80, "date": "Sun Nov 29 15:59:51 2020"}]
