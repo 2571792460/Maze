@@ -1,3 +1,5 @@
+import json
+
 import pygame
 import pygame.locals
 from maze.models.maze import Maze
@@ -42,17 +44,15 @@ class App:
         player_line_number = 0
         player_column_number = 0
 
+        # Get player name from terminal input
         player_name = input("Enter your Player Name: ")
 
         # Create Win and Lose text
         font = pygame.font.SysFont("comicsansms", 35)
         text_win = font.render('You have Win the Game', True, (0, 255, 0))
         text_lost = font.render('You lost the Game', True, (0, 255, 0))
-
         textRect_win = text_win.get_rect()
         textRect_lost = text_lost.get_rect()
-
-
 
         # Update player position
         for i, sub_list in enumerate(maze.map):
@@ -66,8 +66,7 @@ class App:
         # Game Title is called maze game
         pygame.display.set_caption("maze game")
 
-        # music = pygame.mixer.Sound("./models/Bog-Creatures-On-the-Move.mp3")
-        # music.play()
+        # Play music when game start
         file_path = './models/Bog-Creatures-On-the-Move .wav'
         file_wav = wave.open(file_path)
         frequency = file_wav.getframerate()
@@ -115,6 +114,7 @@ class App:
 
             # Give different reaction base on keyboard command
             keys = pygame.key.get_pressed()
+
             # Show number of items collected in backpack
             if keys[pygame.locals.K_i]:
                 window.blit(text_backpack, (0, 100))
@@ -166,11 +166,12 @@ class App:
                 dt = 0
                 date = datetime.datetime.now().strftime("%c")
                 score = (int(timer) * 1) + (len(player.backpack) * 10)
-                text_time_cost = font.render(str(round(60 - timer, 2)), True, (0, 255, 0))
-                text_score = font.render(str(score), True, (0, 255, 0))
+                time_used = str(round(60 - timer, 2))
+                text_time_cost = font.render("Time: %s s" % time_used, True, (0, 255, 0))
+                text_score = font.render("Score: %s" % score, True, (0, 255, 0))
                 text_player_name = font.render(player_name, True, (0, 255, 0))
                 player_info = Score(player_name, score, date)
-                player_info.add_score()
+                player_info.to_json('models/result.json')
 
                 if len(player.backpack) == 4:
                     window.blit(text_win, textRect_win)
@@ -190,11 +191,12 @@ class App:
                 dt = 0
                 date = datetime.datetime.now().strftime("%c")
                 score = (int(timer) * 1) + (len(player.backpack) * 10)
-                text_time_cost = font.render(str(round(60 - timer, 2)), True, (0, 255, 0))
-                text_score = font.render(str(score), True, (0, 255, 0))
+                time_used = str(round(60 - timer, 2))
+                text_time_cost = font.render("Time: %s s" % time_used, True, (0, 255, 0))
+                text_score = font.render("Score: %s" % score, True, (0, 255, 0))
                 text_player_name = font.render(player_name, True, (0, 255, 0))
                 player_info = Score(player_name, score, date)
-                player_info.add_score()
+                player_info.to_json('models/result.json')
                 window.blit(text_lost, textRect_lost)
                 window.blit(text_player_name, (0, 100))
                 window.blit(text_time_cost, (0, 200))
@@ -203,3 +205,17 @@ class App:
 
             # Update the screen
             pygame.display.update()
+
+        with open('models/result.json', 'r') as f:
+            l = json.load(f)
+            seen = set()
+            new_l = []
+            for d in l:
+                t = tuple(d["player_name"])
+                if t not in seen:
+                    seen.add(t)
+                    new_l.append(d)
+
+        with open('models/result.json', 'w') as f:
+            json.dump(new_l, f)
+
