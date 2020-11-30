@@ -52,6 +52,7 @@ class App:
         text_lost = font.render('You lost the Game', True, (0, 255, 0))
         textRect_win = text_win.get_rect()
         textRect_lost = text_lost.get_rect()
+        to_exit = font.render('press esc or space to quit', True, (0, 255, 0))
 
         # Update player position
         for i, sub_list in enumerate(maze.map):
@@ -178,12 +179,14 @@ class App:
                     window.blit(text_time_cost, (0, 200))
                     window.blit(text_backpack, (0, 300))
                     window.blit(text_score, (0, 400))
+                    window.blit(to_exit, (0, 600))
                 elif len(player.backpack) <= 4:
                     window.blit(text_lost, textRect_lost)
                     window.blit(text_player_name, (0, 100))
                     window.blit(text_time_cost, (0, 200))
                     window.blit(text_backpack, (0, 300))
                     window.blit(text_score, (0, 400))
+                    window.blit(to_exit, (0, 600))
 
             elif timer <= 0:
                 window.fill((255, 255, 255))
@@ -201,6 +204,7 @@ class App:
                 window.blit(text_time_cost, (0, 200))
                 window.blit(text_backpack, (0, 300))
                 window.blit(text_score, (0, 400))
+                window.blit(to_exit, (0, 600))
 
             # Update the screen
             pygame.display.update()
