@@ -4,6 +4,7 @@ from models.score_manager import ScoreManager
 from models.score import Score
 import pytest
 
+
 @pytest.fixture
 def new_player():
     """
@@ -12,10 +13,30 @@ def new_player():
     return Score(player_name="Rico", score=80, date="Sun Nov 29 15:59:51 2020")
 
 
-# def test_items_text(new_player):
-#     """Test instance was convert into text properly"""
-#     fm = ScoreManager()
-#     assert fm.items_text(new_player) == ["Rico", "80", "Sun Nov 29 15:59:51 2020"]
+def test_items_text(new_player):
+    """
+    Test instance was convert into text properly
+    Must be a list of strings, each string is:
+    <player_name>: <score> at <date>
+    """
+    fm = ScoreManager()
+    fm.add_item(new_player)
+    assert fm.items_text == ["Rico: 80 at Sun Nov 29 15:59:51 2020"]
+
+
+def test_add_unique_player(new_player):
+    """ Tests that the manager does not list duplicate player items """
+    fm = ScoreManager()
+    fm.add_item(new_player)
+    fm.add_item(new_player)
+    assert fm.count() == 1
+
+
+def test_items(new_player):
+    """ Tests the 'items' property """
+    fm = ScoreManager()
+    fm.add_item(new_player)
+    assert fm.items == [new_player]
 
 
 DATA = """[{"player_name": "Group5", "score": 86, "date": "Sun Nov 29 15:59:51 2020"}]"""

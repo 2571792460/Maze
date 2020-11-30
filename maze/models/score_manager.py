@@ -31,7 +31,14 @@ class ScoreManager:
         Returns:
             None
         """
+        if not isinstance(player, Score):
+            raise TypeError("Invalid food item.")
+
         self._items[player.player_name] = player
+
+    def count(self):
+        """ Returns an integer (number of items managed by the instance) """
+        return len(self._items)
 
     def load_from_json(self, f='./models/result.json'):
         """loads player items from a JSON file (default = result.json)"""

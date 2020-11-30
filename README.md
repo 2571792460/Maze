@@ -23,12 +23,15 @@ This is the application which is used for web api.
 This the the original maze layout.
 ##### controllers
 This is the controllers folder. This folder contains all control system.
+
 ```__init__.py, app.py```
 ##### models
 This is the models folder. This folder contains all the attributes and behaviours.
+
 ```__init__.py, maze.py, picture.py, player.py```
 ##### views
 This is the views folder. This folder contains all information user can see.
+
 ```__init__.py, maze_view.py```
 ##### templates
 This the the templates folder. This folder contains all html templates. 
