@@ -38,14 +38,14 @@ This is the unittest folder. This folder contains all tests for controllers, mod
 
 
 ### Run Maze
-1. Run 'main.py'
+1. To run Maze ```python main.py```
 2. Enter your name
 3. Play
 
 
 
 ### View player rank
-1. run 'web_api.py'
+1. run `web_api.py`
 2. go to http://localhost:5000
 
 

@@ -1,5 +1,5 @@
 import random
-from maze.models.player import Player
+from models.player import Player
 
 
 class Maze:

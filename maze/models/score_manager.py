@@ -1,5 +1,5 @@
 import json
-from maze.models.score import Score
+from models.score import Score
 
 
 class ScoreManager:

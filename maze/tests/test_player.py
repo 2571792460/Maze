@@ -1,4 +1,4 @@
-from maze.models.player import Player
+from models.player import Player
 import pytest
 
 def test_constructor():

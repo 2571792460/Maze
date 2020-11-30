@@ -1,12 +1,11 @@
 import json
-
 import pygame
 import pygame.locals
-from maze.models.maze import Maze
-from maze.models.picture import Wall, Character, Items, Floor, Exit
-from maze.models.player import Player
-from maze.views.maze_view import MazeView
-from maze.models.score import Score
+from models.maze import Maze
+from models.picture import Wall, Character, Items, Floor, Exit
+from models.player import Player
+from views.maze_view import MazeView
+from models.score import Score
 import datetime
 import wave
 
@@ -173,7 +172,6 @@ class App:
                 player_info = Score(player_name, score, date)
                 player_info.to_json('models/result.json')
 
-
                 if len(player.backpack) == 4:
                     window.blit(text_win, textRect_win)
                     window.blit(text_player_name, (0, 100))
@@ -208,14 +206,14 @@ class App:
             pygame.display.update()
 
         with open('models/result.json', 'r') as f:
-            l = json.load(f)
+            json_list = json.load(f)
             seen = set()
-            new_l = []
-            for d in l:
-                t = tuple(d["player_name"])
+            new_list = []
+            for i in json_list:
+                t = tuple(i["player_name"])
                 if t not in seen:
                     seen.add(t)
-                    new_l.append(d)
+                    new_list.append(i)
 
         with open('models/result.json', 'w') as f:
-            json.dump(new_l, f)
+            json.dump(new_list, f)

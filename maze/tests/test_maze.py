@@ -1,4 +1,4 @@
-from maze.models.maze import Maze
+from models.maze import Maze
 import pytest
 
 
