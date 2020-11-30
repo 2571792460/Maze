@@ -173,6 +173,7 @@ class App:
                 player_info = Score(player_name, score, date)
                 player_info.to_json('models/result.json')
 
+
                 if len(player.backpack) == 4:
                     window.blit(text_win, textRect_win)
                     window.blit(text_player_name, (0, 100))
@@ -218,4 +219,3 @@ class App:
 
         with open('models/result.json', 'w') as f:
             json.dump(new_l, f)
-

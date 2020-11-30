@@ -1,7 +1,6 @@
 import json
 from operator import itemgetter
 
-
 class Score:
     def __init__(self, player_name, score, date):
         self.player_name = player_name
@@ -28,11 +27,6 @@ class Score:
         new_list = sorted(data, reverse=True, key=itemgetter('score'))
         with open(file, 'w') as json_file:
             json.dump(new_list, json_file)
-
-    # def serialize(self):
-    #     new_list = sorted(self.score_list, reverse=True, key=itemgetter('score'))
-    #     print(new_list)
-    #     return new_list
 
     def print_data(self):
         print(self.score_list)

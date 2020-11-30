@@ -13,3 +13,4 @@ class Player():
     def pick_up_item(self, item):
         # player backpage list append an item
         self._backpack.append(item)
+
