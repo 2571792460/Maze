@@ -86,10 +86,16 @@ If player haven't collected all items and moves to exit, player lose.
 
 ### Unit test
 There a list of test files inside `tests` folder. They will run pytest for Maze in different aspects.
-1. to test maze:
+1. to test `maze.py` work properly:
 ```pytest test_maze.py```
-2. to test player:
+2. to test `player.py` properly:
 ```pytest test_player.py```
+3. to test `score.py` work properly:
+```pytest test_score.py```
+4. to test `score_manager.py` work properly:
+```pytest test_score_manager.py```
+
+
 
 ### Authors
 ACIT 2515 2C - Group 5
