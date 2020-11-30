@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block content %}
+<ol>
+
+    {% for player in players %}
+    <li>{{ player.player_name }}: {{ player.score }}  at {{ player.date }}</li>
+    {% endfor %}
+
+</ol>
+{% endblock %}
