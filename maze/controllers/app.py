@@ -170,6 +170,7 @@ class App:
                 text_time_cost = font.render("Time: %s s" % time_used, True, (0, 255, 0))
                 text_score = font.render("Score: %s" % score, True, (0, 255, 0))
                 text_player_name = font.render(player_name, True, (0, 255, 0))
+                # Create a "Score" class instance to save player info into json
                 player_info = Score(player_name, score, date)
                 player_info.to_json('models/result.json')
 
@@ -188,6 +189,7 @@ class App:
                     window.blit(text_score, (0, 400))
                     window.blit(to_exit, (0, 600))
 
+            # When player takes over 60s to finish the game, force quit player and print game information
             elif timer <= 0:
                 window.fill((255, 255, 255))
                 dt = 0
@@ -209,6 +211,7 @@ class App:
             # Update the screen
             pygame.display.update()
 
+        # Remove duplicate dic from result json file
         with open('models/result.json', 'r') as f:
             json_list = json.load(f)
             seen = set()
