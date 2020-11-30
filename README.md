@@ -17,6 +17,8 @@
 The main structures of Maze are based on MVC design pattern.
 ##### main.py
 This is the main which is used to run Maze.
+##### web_api.py
+This is the application which is used for web api.
 ##### maze.txt
 This the the original maze layout.
 ##### controllers
@@ -28,37 +30,48 @@ This is the models folder. This folder contains all the attributes and behaviour
 ##### views
 This is the views folder. This folder contains all information user can see.
 ```__init__.py, maze_view.py```
+##### templates
+This the the templates folder. This folder contains all html templates. 
 ##### tests
 This is the unittest folder. This folder contains all tests for controllers, models and views.
 
 
 
 ### Run Maze
-1. Open `maze` folder with PyCharm
-2. Run `main.py`
+1. Run 'main.py'
+2. Enter your name
+3. Play
+
+
+
+### View player rank
+1. run 'web_api.py'
+2. go to http://localhost:5000
 
 
 
 ### Play Maze
-##### elements:
+##### Elements:
 
 **player**
 
-![player](./maze/models/player.png)
+![player](./maze/models/player.png "Player")
 
 **item**
 
-![player](./maze/models/item.png)
+![player](./maze/models/item.png "Item")
 
 **exit**
 
-![player](./maze/models/exit.png)
+![player](./maze/models/exit.png "exit")
 
-##### move: 
+##### Move: 
 
 `w` move up `s` move down `a` move left `d` move right
 
-`esc` to exit Maze
+`i` show backpack
+
+`esc` or `space` to exit Maze
 
 ##### Win/Lose condition:
 
@@ -68,13 +81,14 @@ If player haven't collected all items and moves to exit, player lose.
 
 
 
-### unit test
+### Unit test
+There a list of test files inside `tests` folder. They will run pytest for Maze in different aspects.
+1. to test maze:
+```pytest test_maze.py```
+2. to test player:
+```pytest test_player.py```
 
-|Method tested|ID|Comment|																			
-|-------------|-----|--------------|	
-|__init__|010A|maze class has attribute "_map", "_numRow", '_numCol', '_player', '_player_position'|
-|can move|010B|maze can move to (1,1) , can not move to (0.0)|				
-|is item|010C|(1,1) is an item and (1,3) is not an item|					
-|is exit|010D|(4,6 ) is exit and (1,1) is not exit|
-|__init__|020A|player class has attribute "_backpack"|					
-|pick up item|020B|player backpack could pick up item "A"|
+### Authors
+ACIT 2515 2C - Group 5
+
+Oliver Yan, Oliver Si, and Jianfei Liu
