@@ -15,6 +15,7 @@ def test_constructor():
     assert hasattr(reg_maze, '_player')
     assert hasattr(reg_maze, '_player_position')
 
+
 def test_can_move_to():
     """
     This is to test if can move to that spot
@@ -25,6 +26,7 @@ def test_can_move_to():
     assert reg_maze.can_move_to(1, 1)
     assert not reg_maze.can_move_to(0, 0)
 
+
 def test_is_item():
     """
     This is to test if the spot is an item
@@ -34,6 +36,7 @@ def test_is_item():
 
     assert reg_maze1.is_item(1, 1)
     assert not reg_maze1.is_item(1, 3)
+
 
 def test_is_exit():
     """
