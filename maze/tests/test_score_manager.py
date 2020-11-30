@@ -6,7 +6,9 @@ import pytest
 
 @pytest.fixture
 def new_player():
-    """Fixture for a new player"""
+    """
+    Fixture for a new player
+    """
     return Score(player_name="Rico", score=80, date="Sun Nov 29 15:59:51 2020")
 
 
@@ -20,7 +22,9 @@ DATA = """[{"player_name": "Group5", "score": 86, "date": "Sun Nov 29 15:59:51 2
 
 
 def test_check_load_json_filename():
-    """ Makes sure that `open` is called with the correct file name in `load_from_json` """
+    """
+    Makes sure that `open` is called with the correct file name in `load_from_json`
+    """
     with patch('builtins.open', mock_open(read_data=DATA)) as mock_file:
         fm = ScoreManager()
         fm.load_from_json("test.json")
@@ -29,7 +33,9 @@ def test_check_load_json_filename():
 
 
 def test_load_from_json():
-    """ Patches `open` to load one Score item in the manager, and check its attributes """
+    """
+    Patches `open` to load one Score item in the manager, and check its attributes
+    """
     with patch('builtins.open', mock_open(read_data=DATA)) as mock_file:
         fm = ScoreManager()
         fm.load_from_json("test.json")
