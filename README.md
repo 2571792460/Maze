@@ -48,7 +48,7 @@ This is the unittest folder. This folder contains all tests for controllers, mod
 
 
 ### View player rank
-1. run `web_api.py`
+1. run `python app.py`
 2. go to http://localhost:5000
 
 
